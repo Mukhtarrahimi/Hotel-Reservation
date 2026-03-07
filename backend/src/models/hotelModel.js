@@ -23,9 +23,8 @@ const hotelSchema = new mongoose.Schema(
 
     image: {
       type: String,
-      required: [true, "Image is required"],
+      default: "https://via.placeholder.com/300",
     },
-
     date: {
       type: Date,
       default: Date.now,
