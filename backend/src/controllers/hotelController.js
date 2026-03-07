@@ -44,35 +44,12 @@ export const createHotel = async (req, res) => {
 // Get All Hotels
 export const getHotels = async (req, res) => {
   try {
-    let { page = 1, limit = 10, sort = "-createdAt", name } = req.body;
-    page = parseInt(page);
-    limit = parseInt(limit);
+    const hotels = await Hotel.find();
 
-    // Filter
-    const filter = {};
-
-    if (name) {
-      filter.name = { $regex: name, $options: "i" };
-    }
-    // query
-
-    const hotels = await Hotel.find(filter)
-      .sort(sort)
-      .skip((page - 1) * limit)
-      .limit(limit);
-
-    // total count
-    const total = await Hotel.countDocuments(filter);
     res.status(200).json({
       success: true,
       message: "hotels fetched successfully",
       data: hotels,
-      pagination: {
-        total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
-      },
     });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -83,31 +60,35 @@ export const getHotels = async (req, res) => {
 export const getHotel = async (req, res) => {
   try {
     const { id } = req.params;
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({
+      return res.status(400).json({
         success: false,
-        message: "Invalid hotel id",
+        message: "Invalid hotel ID",
       });
     }
+
     const hotel = await Hotel.findById(id);
+
     if (!hotel) {
       return res.status(404).json({
         success: false,
         message: "Hotel not found",
       });
     }
-    res.status(200).json({
+
+    return res.status(200).json({
       success: true,
-      message: "hotel fetched successfully",
+      message: "Hotel fetched successfully",
       data: hotel,
     });
-
-    res.json({ message: "get one hotel" });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
-
 // Update Hotel
 export const updateHotel = async (req, res) => {
   try {
