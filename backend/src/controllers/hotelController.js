@@ -43,7 +43,36 @@ export const createHotel = async (req, res) => {
 // Get All Hotels
 export const getHotels = async (req, res) => {
   try {
-    res.json({ message: "get all hotels" });
+    let { page = 1, limit = 10, sort = "-createdAt", name } = req.body;
+    page = parseInt(page);
+    limit = parseInt(limit);
+
+    // Filter
+    const filter = {};
+
+    if (name) {
+      filter.name = { $regex: name, $options: "i" };
+    }
+    // query
+
+    const hotels = await Hotel.find(filter)
+      .sort(sort)
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    // total count
+    const total = await Hotel.countDocuments(filter);
+    res.status(200).json({
+      success: true,
+      message: "hotels fetched successfully",
+      data: hotels,
+      pagination: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+      },
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
