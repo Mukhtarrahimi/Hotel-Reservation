@@ -3,12 +3,12 @@ import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 
 function Footer() {
   return (
-    <div>
+    <div className="flex flex-col gap-12 px-16 py-16 bg-black text-white">
       {/* Top Section */}
-      <div>
-        <h2>Sign Up For Exclusive Offers</h2>
-        <div>
-          <input type="email" placeholder="Enter your email address" />
+      <div className="grid place-content-center gap-6 text-center">
+        <h2 className="text-4xl font-bold">Sign Up For Exclusive Offers</h2>
+        <div className="flex items-center justify-center max-w-xl max-auto w-full">
+          <input type="email" placeholder="Enter your email address" className="flex-row px-10 py-4 border-2 border-r-0 border-lime-500 rounded-l-full outline-none" />
           <button>Join Now</button>
         </div>
       </div>
