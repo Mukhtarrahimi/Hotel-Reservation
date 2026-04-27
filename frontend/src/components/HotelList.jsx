@@ -15,26 +15,26 @@ function HotelList() {
   console.log("rooms", rooms);
 
   return (
-    <div>
-      <div>
-        <h2>
+    <div className="bg-[#f7f0eb] py-16 px-4">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-4xl font-serif text-center mb-12 text-gray-800">
           Book your stay and <br /> relax in luxury
         </h2>
-        <div>
+        <div className="grid grid-cols-2 gap-10">
           {rooms && rooms.length > 0 ? (
             rooms.map((room, index) => {
               const { id, image, name, price } = room;
               return (
-                <div key={index}>
+                <div key={index} className="bg-white shadow rounded-l overflow-hidden">
                   <Link to={`/room/${id}`}>
-                    <img src={image} alt="" />
+                    <img src={image} alt="" className="w-full h-80 object-cover"/>
                   </Link>
-                  <div>
-                    <h3>{image}</h3>
-                    <p>${price}</p>
-                    <div>
+                  <div className="p-5">
+                    <h3 className="text-2xl font-semibold text-gray-800 mb-1">{name}</h3>
+                    <p className="text-gray-800 text-lg mb-4">${price}</p>
+                    <div className="grid grid-cols-2 gap-4 text-base text-gray-700 ">
                       {amenitiesList.map((amenity, idx) => (
-                        <div key={idx}>
+                        <div key={idx} className="flex items-center gap-2">
                           {amenity.icon} <span>{amenity.label}</span>
                         </div>
                       ))}
@@ -44,7 +44,7 @@ function HotelList() {
               );
             })
           ) : (
-            <p>No rooms available</p>
+            <p className="text-gray-500 text-center col-span-5">No rooms available</p>
           )}
         </div>
       </div>
