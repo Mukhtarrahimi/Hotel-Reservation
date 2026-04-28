@@ -25,12 +25,21 @@ function HotelList() {
             rooms.map((room, index) => {
               const { id, image, name, price } = room;
               return (
-                <div key={index} className="bg-white shadow rounded-l overflow-hidden">
+                <div
+                  key={index}
+                  className="bg-white shadow rounded-l overflow-hidden"
+                >
                   <Link to={`/room/${id}`}>
-                    <img src={image} alt="" className="w-full h-80 object-cover"/>
+                    <img
+                      src={image}
+                      alt=""
+                      className="w-full h-80 object-cover"
+                    />
                   </Link>
                   <div className="p-5">
-                    <h3 className="text-2xl font-semibold text-gray-800 mb-1">{name}</h3>
+                    <h3 className="text-2xl font-semibold text-gray-800 mb-1">
+                      {name}
+                    </h3>
                     <p className="text-gray-800 text-lg mb-4">${price}</p>
                     <div className="grid grid-cols-2 gap-4 text-base text-gray-700 ">
                       {amenitiesList.map((amenity, idx) => (
@@ -44,7 +53,9 @@ function HotelList() {
               );
             })
           ) : (
-            <p className="text-gray-500 text-center col-span-5">No rooms available</p>
+            <p className="text-gray-500 text-center col-span-5">
+              No rooms available
+            </p>
           )}
         </div>
       </div>
