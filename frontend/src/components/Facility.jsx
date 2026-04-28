@@ -42,7 +42,25 @@ const services = [
 ];
 
 function Facility() {
-  return <div>Facility</div>;
+  return (
+    <div>
+      <div>
+        <div>
+          <p>Services</p>
+          <h2>Facilties & Services</h2>
+        </div>
+        <div>
+          {services.map((service, index) => (
+            <div key={index}>
+              <div>{service.icon}</div>
+              <h3>{service.title}</h3>
+              <p>{service.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Facility;
