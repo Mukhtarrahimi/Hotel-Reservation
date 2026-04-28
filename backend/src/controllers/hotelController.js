@@ -92,17 +92,76 @@ export const getHotel = async (req, res) => {
 // Update Hotel
 export const updateHotel = async (req, res) => {
   try {
-    res.json({ message: "update hotel" });
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid hotel id",
+      });
+    }
+
+    const hotel = await Hotel.findByIdAndUpdate(
+      id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    if (!hotel) {
+      return res.status(404).json({
+        success: false,
+        message: "Hotel not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Hotel updated successfully",
+      data: hotel,
+    });
+
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+      data: hotel
+    });
   }
 };
-
 // Delete Hotel
 export const deleteHotel = async (req, res) => {
   try {
-    res.json({ message: "delete hotel" });
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid hotel id",
+      });
+    }
+
+    const hotel = await Hotel.findByIdAndDelete(id);
+
+    if (!hotel) {
+      return res.status(404).json({
+        success: false,
+        message: "Hotel not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Hotel deleted successfully",
+      data: hotel,
+    });
+
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
