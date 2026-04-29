@@ -3,6 +3,10 @@ import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 export const backendUrl = "https://localhost:5000";
 import Login from "./components/Login";
+import Sidebar from "./components/Sidebar";
+import AddHotel from "./pages/AddHotel";
+import ListHotel from "./pages/ListHotel";
+import Reservation from "./pages/Reservation";
 
 function App() {
   const [token, setToken] = useState("");
