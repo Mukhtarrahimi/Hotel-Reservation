@@ -8,31 +8,31 @@ function Footer() {
       <div className="grid place-content-center gap-6 text-center">
         <h2 className="text-4xl font-bold">Sign Up For Exclusive Offers</h2>
         <div className="flex items-center justify-center max-w-xl max-auto w-full">
-          <input type="email" placeholder="Enter your email address" className="flex-row px-10 py-4 border-2 border-r-0 border-lime-500 rounded-l-full outline-none" />
-          <button>Join Now</button>
+          <input type="email" placeholder="Enter your email address" className="flex-row px-10 py-4 border-2 border-r-0 border-lime-500 rounded-l-full outline-none text-sm" />
+          <button className="bg-lime-400 text-white px-8 py-4 rounded-r-full font-bold">Join Now</button>
         </div>
       </div>
       {/* Bottom Section */}
-      <div>
+      <div className="flex flex-col justify-between items-center text-center gap-6">
         <div>
-          <h2>NEGAR HOTEL</h2>
-          <div>
-            <FaFacebook />
-            <FaInstagram />
-            <FaYoutube />
+          <h2 className="text-2xl font-bold">NEGAR HOTEL</h2>
+          <div className="flex justify-center gap-4 mt-3 text-lime-500">
+            <FaFacebook className="text-3xl cursor-pointer"/>
+            <FaInstagram className="text-3xl cursor-pointer"/>
+            <FaYoutube className="text-3xl cursor-pointer"/>
           </div>
         </div>
         <div>
-          <ul>
-            <li>HOME</li>
-            <li>BOOKINGS</li>
-            <li>ROOMS</li>
-            <li>ABOUT</li>
-            <li>CONTACTS</li>
+          <ul className="flex gap-6 justify-center text-base font-medium">
+            <li className="cursor-pointer">HOME</li>
+            <li className="cursor-pointer">BOOKINGS</li>
+            <li className="cursor-pointer">ROOMS</li>
+            <li className="cursor-pointer">ABOUT</li>
+            <li className="cursor-pointer">CONTACTS</li>
           </ul>
         </div>
       </div>
-      <p>@ 2026 NEGAR HOTELS. All rights reserved.</p>
+      <p className="text-center text-sm mt-4">@ 2026 NEGAR HOTELS. All rights reserved.</p>
     </div>
   );
 }
