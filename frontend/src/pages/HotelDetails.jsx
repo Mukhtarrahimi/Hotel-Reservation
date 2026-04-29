@@ -15,60 +15,91 @@ function HotelDetails() {
     return room.id === parseInt(id);
   });
   return (
-    <div>
+    <div className="mx-auto max-w-7xl p-6 gird grid-cols-1 gap-8">
       {/* Left side */}
-      <div>
+      <div className="md:col-span-2 space-y-6">
         <div>
-          <h1>{room.name}</h1>
-          <p>${room.price}</p>
+          <h1 className="text-3xl font-bold">{room.name}</h1>
+          <p className="text-xl text-lime-500 mt-1">${room.price}</p>
         </div>
-        <img src={room.image} alt="" />
-        <div>
-          <h2>Amenities</h2>
-          <div>
-            <div>
+        <img src={room.image} alt="" className="w-full rounded-lg shadow-md" />
+        <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+          <h2 className="text-xl font-semibold mb-3">Amenities</h2>
+          <div className="grid grid-cols-2 gap-4 text-gray-700">
+            <div className="flex items-center gap-2">
               <FaWifi /> Wi-Fi
             </div>
-            <div>
+            <div className="flex items-center gap-2">
               <FaTv /> Cable TV
             </div>
-            <div>
+            <div className="flex items-center gap-2">
               <FaUtensils /> Resturant
             </div>
-            <div>
+            <div className="flex items-center gap-2">
               <FaSwimmingPool /> Pool
             </div>
-            <div>
+            <div className="flex items-center gap-2">
               <FaConciergeBell /> Room Service
             </div>
           </div>
           <div>
-            <h2>Room DEscription</h2>
-            <p>{room.description}</p>
-            <p>{room.description}</p>
-            <p>{room.description}</p>
-            <p>{room.description}</p>
+            <h2 className="text-lg font-semibold mb-2">Room DEscription</h2>
+            <p className="text-gray-600">{room.description}</p>
+            <p className="text-gray-600">{room.description}</p>
+            <p className="text-gray-600">{room.description}</p>
+            <p className="text-gray-600">{room.description}</p>
           </div>
         </div>
       </div>
       {/* Right side */}
-      <div>
-        <h2>Book Your Stay</h2>
-        <form action="">
-          <input type="text" name="" placeholder="Name" />
-          <input type="email" name="" placeholder="Email" />
-          <input type="tel" name="" placeholder="Phone Number" />
+      <div className="bg-white p-6 mt-18 rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold mb-4">Book Your Stay</h2>
+        <form action="" className="space-y-4">
+          <input
+            type="text"
+            name=""
+            placeholder="Name"
+            className="w-full border border-gray-300 p-3 rounded-lg "
+          />
+          <input
+            type="email"
+            name=""
+            placeholder="Email"
+            className="w-full border border-gray-300 p-3 rounded-lg "
+          />
+          <input
+            type="tel"
+            name=""
+            placeholder="Phone Number"
+            className="w-full border border-gray-300 p-3 rounded-lg "
+          />
           <div>
-            <label htmlFor="date">Check-In</label>
-            <input type="date" name="" id="" />
+            <label htmlFor="date" className="font-bold">
+              Check-In
+            </label>
+            <input
+              type="date"
+              name=""
+              id=""
+              className="w-full border border-gray-300 p-3 rounded-lg "
+            />
           </div>
           <div>
-            <label htmlFor="">Check-Out</label>
-            <input type="date" name="" id="" />
+            <label htmlFor="" className="font-bold">
+              Check-Out
+            </label>
+            <input
+              type="date"
+              name=""
+              id=""
+              className="w-full border border-gray-300 p-3 rounded-lg "
+            />
           </div>
           <div>
-            <label htmlFor="">Number of Guests</label>
-            <select name="" id="">
+            <label htmlFor="" className="font-bold">
+              Number of Guests
+            </label>
+            <select name="" id="" className="w-full p-3 mb-3 border rounded-lg focus:ring-blue-300 ">
               {[
                 ...Array(3)
                   .keys()
@@ -80,7 +111,7 @@ function HotelDetails() {
               ]}
             </select>
           </div>
-          <button type="submit">Book Now</button>
+          <button type="submit" className="w-full bg-lime-400 text-white p-3 rounded-lg hover:bg-lime-300 transition">Book Now</button>
         </form>
       </div>
     </div>
