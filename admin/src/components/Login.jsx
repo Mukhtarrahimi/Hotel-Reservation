@@ -1,10 +1,29 @@
 import React from "react";
+import axios from "axios";
 import { useState } from "react";
 import { backendUrl } from "../App";
 
-function Login() {
+function Login({ setToken }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const adminLoginHandler = async (e) => {
+    try {
+      e.preventDefault();
+      const response = await axios.post(backendUrl + "/api/v1/users/admin", {
+        email,
+        password,
+      });
+      console.log(response);
+      if (response.data.token) {
+        setToken(response.data.token);
+      } else {
+        console.log(error);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div>
       <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -12,7 +31,7 @@ function Login() {
           <h1 className="text-2xl font-bold text-center text-gray-800 mb-4">
             Login Admin
           </h1>
-          <form action="">
+          <form onSubmit={adminLoginHandler}>
             <div className="mb-4 ">
               <p className="text-sm font-semibold text-gray-600 mb-2">
                 Email Address

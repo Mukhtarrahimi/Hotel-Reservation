@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-export const backendUrl = "https://localhost:5000";
+export const backendUrl = "http://localhost:5000";
 import Login from "./components/Login";
 import Sidebar from "./components/Sidebar";
 import AddHotel from "./pages/AddHotel";
@@ -13,7 +13,7 @@ function App() {
   return (
     <div>
       {!token ? (
-        <Login />
+        <Login setToken={setToken} />
       ) : (
         <>
           <div>
