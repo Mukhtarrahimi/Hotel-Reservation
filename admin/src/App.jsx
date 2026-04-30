@@ -7,9 +7,13 @@ import Sidebar from "./components/Sidebar";
 import AddHotel from "./pages/AddHotel";
 import ListHotel from "./pages/ListHotel";
 import Reservation from "./pages/Reservation";
+import { useEffect } from "react";
 
 function App() {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  useEffect(() => {
+    localStorage.setItem("token", token);
+  }, [token]);
   return (
     <div>
       {!token ? (
@@ -17,7 +21,7 @@ function App() {
       ) : (
         <>
           <div>
-            <Sidebar />
+            <Sidebar setToken={setToken} />
             <div>
               <Routes>
                 <Route path="/add" element={AddHotel} />

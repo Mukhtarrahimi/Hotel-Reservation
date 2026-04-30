@@ -17,6 +17,7 @@ function Login({ setToken }) {
       console.log(response);
       if (response.data.token) {
         setToken(response.data.token);
+        localStorage.setItem("token", response.data.token);
       } else {
         console.log(error);
       }
