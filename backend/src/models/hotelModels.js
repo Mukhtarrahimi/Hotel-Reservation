@@ -1,33 +1,39 @@
 import mongoose from "mongoose";
 
-const hotelSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-    maxlenght: [50, "name less then 50 charachter"],
-    minlenght: [3, "name must be more then 3 charachter"],
-  },
-  price: {
-    type: Number,
-    required: true,
-    positive: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  image: {
-    type: String,
-    required: true,
-  },
-  date: {
-    type: String,
-    required: true,
-  },
-});
+const hotelSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, "Hotel name is required"],
+      trim: true,
+      maxlength: [50, "Name must be less than 50 characters"],
+      minlength: [3, "Name must be at least 3 characters"],
+    },
 
-const hotelModel =
-  mongoose.models.hotel || mongoose.model("hotel", hotelSchema);
+    price: {
+      type: Number,
+      required: [true, "Price is required"],
+      min: [0, "Price must be positive"],
+    },
 
-export default hotelModel;
+    description: {
+      type: String,
+      required: [true, "Description is required"],
+    },
+
+    image: {
+      type: String,
+      required: [true, "Image is required"],
+    },
+
+    date: {
+      type: Date,
+      default: Date.now,
+    },
+  },
+  { timestamps: true },
+);
+
+const Hotel = mongoose.models.Hotel || mongoose.model("Hotel", hotelSchema);
+
+export default Hotel;
