@@ -4,7 +4,24 @@ import Hotel from "../models/hotelModel.js";
 // Create Hotel
 export const createHotel = async (req, res) => {
   try {
-    res.json({ message: "create hotel" });
+    const { name, price, description, image } = req.body;
+    if (!name || !price || !description || !image) {
+      res.status(400).json({
+        success: false,
+        message: "All fields are required",
+      });
+    }
+    const hotel = await Hotel.create({
+      name,
+      price,
+      description,
+      image,
+    });
+    res.status(201).json({
+      success: true,
+      message: "Hotel created successfully",
+      data: hotel,
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
