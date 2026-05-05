@@ -1,6 +1,5 @@
 import express from "express";
 const router = express.Router();
-import { upload } from "../middlewares/upload.js";
 
 import {
   createHotel,
@@ -11,7 +10,7 @@ import {
 } from "../controllers/hotelController.js";
 
 // RESTful routes
-router.post("/", upload.single("image"), createHotel);
+router.post("/", createHotel);
 router.get("/", getHotels);
 router.get("/:id", getHotel);
 router.put("/:id", updateHotel);

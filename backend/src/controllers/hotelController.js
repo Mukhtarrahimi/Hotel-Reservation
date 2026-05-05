@@ -1,5 +1,4 @@
 import Hotel from "../models/hotelModel.js";
-import { uploadImage } from "../utils/uploadImage.js";
 
 // Create Hotel
 export const createHotel = async (req, res) => {
