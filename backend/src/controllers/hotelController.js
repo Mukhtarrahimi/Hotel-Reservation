@@ -1,21 +1,29 @@
 import Hotel from "../models/hotelModel.js";
-// import { uploadImage } from "../utils/uploadImage.js";
+import { uploadImage } from "../utils/uploadImage.js";
 
 // Create Hotel
 export const createHotel = async (req, res) => {
   try {
     const { name, price, description, image } = req.body;
+    const file = req.file;
+    if (!file) {
+      res.status(400).json({
+        success: false,
+        message: "Image is required",
+      });
+    }
     if (!name || !price || !description || !image) {
       res.status(400).json({
         success: false,
         message: "All fields are required",
       });
     }
+    const imageUrl = await updateHotel(file.path);
     const hotel = await Hotel.create({
       name,
       price,
       description,
-      image,
+      image: imageUrl,
     });
     res.status(201).json({
       success: true,
