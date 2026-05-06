@@ -1,5 +1,5 @@
 import Hotel from "../models/hotelModel.js";
-import cloudinary from "../config/cloudinary.js";
+import { uploadImage } from "../utils/uploadImage.js";
 
 // Create Hotel
 export const createHotel = async (req, res) => {
@@ -14,16 +14,11 @@ export const createHotel = async (req, res) => {
       });
     }
 
-    let imageUrl = "";
+    let imageUrl = "https://via.placeholder.com/150";
 
+    // اگر فایل وجود داشت → upload به cloudinary
     if (file) {
-      const result = await cloudinary.uploader.upload(file.path, {
-        resource_type: "image",
-      });
-
-      imageUrl = result.secure_url;
-    } else {
-      imageUrl = "https://via.placeholder.com/150";
+      imageUrl = await uploadImage(file.path);
     }
 
     const hotel = await Hotel.create({
