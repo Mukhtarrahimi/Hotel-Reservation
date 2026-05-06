@@ -9,6 +9,7 @@ import routes from "./routes/index.js";
 // middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // routes
 app.use(API.BASE, routes);

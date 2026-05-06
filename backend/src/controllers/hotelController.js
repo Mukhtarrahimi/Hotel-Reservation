@@ -1,39 +1,50 @@
 import Hotel from "../models/hotelModel.js";
+import cloudinary from "../config/cloudinary.js";
 
 // Create Hotel
 export const createHotel = async (req, res) => {
   try {
-    const { name, price, description, image } = req.body;
+    const { name, price, description } = req.body;
     const file = req.file;
-    if (!file) {
-      res.status(400).json({
-        success: false,
-        message: "Image is required",
-      });
-    }
-    if (!name || !price || !description || !image) {
-      res.status(400).json({
+
+    if (!name || !price || !description) {
+      return res.status(400).json({
         success: false,
         message: "All fields are required",
       });
     }
-    const imageUrl = await updateHotel(file.path);
+
+    let imageUrl = "";
+
+    if (file) {
+      const result = await cloudinary.uploader.upload(file.path, {
+        resource_type: "image",
+      });
+
+      imageUrl = result.secure_url;
+    } else {
+      imageUrl = "https://via.placeholder.com/150";
+    }
+
     const hotel = await Hotel.create({
       name,
       price,
       description,
       image: imageUrl,
     });
+
     res.status(201).json({
       success: true,
       message: "Hotel created successfully",
       data: hotel,
     });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 };
-
 // Get All Hotels
 export const getHotels = async (req, res) => {
   try {
