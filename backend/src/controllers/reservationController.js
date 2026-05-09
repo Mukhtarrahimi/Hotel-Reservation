@@ -3,6 +3,10 @@ import Reservation from "../models/reservationModel.js";
 // Create Reservation
 export const createReservation = async (req, res) => {
   try {
+    res.status(201).json({
+      success: true,
+      message: "reservation created successfully",
+    });
   } catch (error) {
     res.status(500).json({
       success: false,

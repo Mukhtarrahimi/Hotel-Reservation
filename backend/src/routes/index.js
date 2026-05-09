@@ -12,6 +12,6 @@ router.get("/health", (req, res) => {
 });
 
 router.use("/hotels", hotelRoutes);
-router.use("/reservation", reservationRoutes);
+router.use("/reservations", reservationRoutes);
 
 export default router;
