@@ -27,12 +27,14 @@ const reservationSchema = new mongoose.Schema(
     },
 
     roomId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Room",
+      //   type: mongoose.Schema.Types.ObjectId,
+      //   ref: "Room",
+      type: String,
+      required: true,
     },
 
     guests: {
-      type: Number,
+      type: String,
       required: true,
     },
 
@@ -46,7 +48,7 @@ const reservationSchema = new mongoose.Schema(
       required: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 export default mongoose.model("Reservation", reservationSchema);

@@ -3,9 +3,37 @@ import Reservation from "../models/reservationModel.js";
 // Create Reservation
 export const createReservation = async (req, res) => {
   try {
+    const { name, email, phone, roomName, roomId, guests, checkin, checkout } =
+      req.body;
+    if (
+      !name ||
+      !email ||
+      !phone ||
+      !roomName ||
+      !roomId ||
+      !guests ||
+      !checkin ||
+      !checkout
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "All Fields are required",
+      });
+    }
+    const reservation = await Reservation.create({
+      name,
+      phone,
+      email,
+      roomName,
+      roomId,
+      guests,
+      checkin,
+      checkout,
+    });
     res.status(201).json({
       success: true,
       message: "reservation created successfully",
+      data: reservation,
     });
   } catch (error) {
     res.status(500).json({
