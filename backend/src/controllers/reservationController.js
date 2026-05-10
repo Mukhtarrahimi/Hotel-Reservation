@@ -41,9 +41,22 @@ export const createReservation = async (req, res) => {
     });
   }
 };
+
 // Get All Reservation
 export const getReservations = async (req, res) => {
   try {
+    const reservations = await Reservation.find();
+    if (!reservations) {
+      return res.status(404).json({
+        success: true,
+        message: "reservation not found",
+      });
+    }
+    res.status(200).json({
+      success: true,
+      message: "reservations fetched successfully",
+      data: reservations,
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
