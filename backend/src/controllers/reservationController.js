@@ -46,7 +46,7 @@ export const createReservation = async (req, res) => {
 export const getReservations = async (req, res) => {
   try {
     const reservations = await Reservation.find();
-    if (!reservations) {
+    if (reservations.length === 0) {
       return res.status(404).json({
         success: true,
         message: "reservation not found",
