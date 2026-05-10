@@ -10,7 +10,6 @@ export const createReservation = async (req, res) => {
       !email ||
       !phone ||
       !roomName ||
-      !roomId ||
       !guests ||
       !checkin ||
       !checkout

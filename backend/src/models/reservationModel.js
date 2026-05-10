@@ -30,7 +30,6 @@ const reservationSchema = new mongoose.Schema(
       //   type: mongoose.Schema.Types.ObjectId,
       //   ref: "Room",
       type: String,
-      required: true,
     },
 
     guests: {
