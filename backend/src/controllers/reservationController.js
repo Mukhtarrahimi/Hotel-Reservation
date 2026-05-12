@@ -1,5 +1,5 @@
 import Reservation from "../models/reservationModel.js";
-
+import mongoose from "mongoose";
 // Create Reservation
 export const createReservation = async (req, res) => {
   try {
@@ -48,7 +48,7 @@ export const getReservations = async (req, res) => {
     const reservations = await Reservation.find();
     if (reservations.length === 0) {
       return res.status(404).json({
-        success: true,
+        success: false,
         message: "reservation not found",
       });
     }
@@ -67,8 +67,25 @@ export const getReservations = async (req, res) => {
 // Get Reservation By ID
 export const getReservation = async (req, res) => {
   try {
-    const {id} = req.params;
-    if()
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid reservation id",
+      });
+    }
+    const reservation = await Reservation.findById(id);
+    if (!reservation) {
+      return res.status(404).json({
+        success: false,
+        message: "Not found reservation",
+      });
+    }
+    res.status(200).json({
+      success: true,
+      message: "reservation fetched successfully",
+      data: reservation,
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -79,6 +96,28 @@ export const getReservation = async (req, res) => {
 // Update Reservation
 export const updateReservation = async (req, res) => {
   try {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid reservation id",
+      });
+    }
+    const reservation = await Reservation.findByIdAndUpdate(id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!reservation) {
+      return res.status(404).json({
+        success: false,
+        message: "Not found reservation",
+      });
+    }
+    res.status(200).json({
+      success: true,
+      message: "reservation update successfully",
+      data: reservation,
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -89,6 +128,25 @@ export const updateReservation = async (req, res) => {
 // Delete Reservation
 export const deleteReservation = async (req, res) => {
   try {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "invalid reservation id",
+      });
+    }
+    const reservation = await Reservation.findByIdAndDelete(id);
+    if (!reservation) {
+      return res.status(404).json({
+        success: false,
+        message: "reservation not found",
+      });
+    }
+    res.status(200).json({
+      success: true,
+      message: "reservation delete successfully",
+      data: reservation,
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
