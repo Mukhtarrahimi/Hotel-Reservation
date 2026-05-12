@@ -104,7 +104,7 @@ export const updateReservation = async (req, res) => {
       });
     }
     const reservation = await Reservation.findByIdAndUpdate(id, req.body, {
-      new: true,
+      returnDocument: "after",
       runValidators: true,
     });
     if (!reservation) {

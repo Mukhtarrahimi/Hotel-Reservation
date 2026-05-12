@@ -101,14 +101,10 @@ export const updateHotel = async (req, res) => {
       });
     }
 
-    const hotel = await Hotel.findByIdAndUpdate(
-      id,
-      req.body,
-      {
-        new: true,
-        runValidators: true,
-      }
-    );
+    const hotel = await Hotel.findByIdAndUpdate(id, req.body, {
+      returnDocument: "after",
+      runValidators: true,
+    });
 
     if (!hotel) {
       return res.status(404).json({
@@ -122,12 +118,11 @@ export const updateHotel = async (req, res) => {
       message: "Hotel updated successfully",
       data: hotel,
     });
-
   } catch (error) {
     return res.status(500).json({
       success: false,
       message: error.message,
-      data: hotel
+      data: hotel,
     });
   }
 };
@@ -157,7 +152,6 @@ export const deleteHotel = async (req, res) => {
       message: "Hotel deleted successfully",
       data: hotel,
     });
-
   } catch (error) {
     return res.status(500).json({
       success: false,
