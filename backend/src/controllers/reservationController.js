@@ -67,6 +67,8 @@ export const getReservations = async (req, res) => {
 // Get Reservation By ID
 export const getReservation = async (req, res) => {
   try {
+    const {id} = req.params;
+    if()
   } catch (error) {
     res.status(500).json({
       success: false,
