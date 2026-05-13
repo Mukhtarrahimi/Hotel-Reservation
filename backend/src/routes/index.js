@@ -1,8 +1,9 @@
 import express from "express";
 const router = express.Router();
 // import
-import hotelRoutes from "./hotel.routes.js";
-import reservationRoutes from "./reservation.routes.js";
+import hotelRoute from "./hotel.routes.js";
+import reservationRoute from "./reservation.routes.js";
+import userRoute from "./user.routes.js";
 
 router.get("/health", (req, res) => {
   res.status(200).json({
@@ -11,7 +12,8 @@ router.get("/health", (req, res) => {
   });
 });
 
-router.use("/hotels", hotelRoutes);
-router.use("/reservations", reservationRoutes);
+router.use("/hotels", hotelRoute);
+router.use("/reservations", reservationRoute);
+router.use("/users", userRoute);
 
 export default router;
