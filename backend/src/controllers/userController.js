@@ -29,7 +29,7 @@ export const adminController = async (req, res) => {
       process.env.JWT_SECRET,
       {
         expiresIn: "1d",
-      }
+      },
     );
 
     return res.status(200).json({
